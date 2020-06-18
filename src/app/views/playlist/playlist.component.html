@@ -1,0 +1,18 @@
+<div class="content">
+    <div class="playlist">
+        <div class="information-area">
+            <div class="information">
+                <img [src]="playlist?.thumbnailUrl" />
+                <h1>{{ playlist?.title }}</h1>
+                <p>{{ playlist?.description }}</p>
+            </div>
+        </div>
+        <div class="playlist-content-area">
+            <div class="playlist-content">
+                <div class="videos">
+                    <app-playlist-video *ngFor="let video of playlistItems" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-playlist-video>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

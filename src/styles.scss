@@ -4,6 +4,39 @@
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
+$grey: (
+  50: #fbfbfb,
+  100: #f6f6f6,
+  200: #f1f1f1,
+  300: #e5e5e5,
+  400: #c3c3c3,
+  500: #a4a4a4,
+  600: #7b7b7b,
+  700: #666666,
+  800: #212121,
+  900: #030303d8,
+  A100: #f6f6f6,
+  A200: #f1f1f1,
+  A400: #c3c3c3,
+  A700: #666666,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -12,14 +45,14 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$yt-playlist-randomizer-primary: mat-palette($mat-indigo);
-$yt-playlist-randomizer-accent: mat-palette($mat-pink, A200, A100, A400);
+$yt-playlist-randomizer-primary: mat-palette($grey, 800);
+$yt-playlist-randomizer-accent: mat-palette($grey, 900);
 
 // The warn palette is optional (defaults to red).
 $yt-playlist-randomizer-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$yt-playlist-randomizer-theme: mat-light-theme($yt-playlist-randomizer-primary, $yt-playlist-randomizer-accent, $yt-playlist-randomizer-warn);
+$yt-playlist-randomizer-theme: mat-dark-theme($yt-playlist-randomizer-primary, $yt-playlist-randomizer-accent, $yt-playlist-randomizer-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -29,4 +62,9 @@ $yt-playlist-randomizer-theme: mat-light-theme($yt-playlist-randomizer-primary, 
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow: hidden; }
+.content {
+  min-height: 100%;
+  width: 100%;
+  background-color: rgb(24, 24, 24);
+}

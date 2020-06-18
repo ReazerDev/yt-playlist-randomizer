@@ -1,0 +1,61 @@
+.video {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.thumbnail {
+    position: relative;
+}
+
+img {
+    width: 130px;
+    height: 85px;
+    position: relative;
+}
+
+.videoLength {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 4px 4px 8px 4px;
+    color: #fff;
+    background-color: #000000cc;
+    padding: 2px 4px;
+    border-radius: 2px;
+    letter-spacing: .5px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    align-items: center;
+    display: inline-flex;
+}
+
+.videoLength p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0 0 0 10px;
+}
+
+h3 {
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.channelName {
+    margin: 0;
+    color: #aaaaaa;
+}
+
+mat-divider {
+    margin: 16px 0;
+}

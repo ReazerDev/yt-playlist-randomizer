@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'yt-playlist-randomizer';
+  title = 'Youtube Playlist Randomizer';
 }

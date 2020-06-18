@@ -1,0 +1,35 @@
+p {
+    color: rgba($color: #fff, $alpha: .5);
+}
+
+h1 {
+    color: #fff;
+    padding-top: 10px;
+}
+
+img {
+    width: 357px;
+    height: 200px;
+}
+
+.playlist {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.information {
+    padding: 50px 50px 0 50px;
+}
+
+.playlist-content-area {
+    overflow: scroll;
+    width: 100%;
+    background-color: rgb(15, 15, 15);
+}
+
+.videos {
+    padding: 16px 30px;
+}
