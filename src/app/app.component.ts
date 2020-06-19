@@ -13,4 +13,8 @@ export class AppComponent {
   public play(playlistItems) {
     this.videoPlayer.play(playlistItems);
   }
+  
+  public playVideo(playlistItems, videoId) {
+    this.videoPlayer.play(playlistItems, videoId);
+  }
 }

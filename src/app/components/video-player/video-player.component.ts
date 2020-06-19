@@ -10,7 +10,7 @@ export class VideoPlayerComponent implements OnInit {
   private videos: PlaylistItem[];
   private randomPlaylist: string[] = [];
   private currentVideo: number = 0;
-  private playerReady: boolean = false;
+  public isPlaying: boolean = false;
 
   private YT: any;
   private player: any;
@@ -27,13 +27,24 @@ export class VideoPlayerComponent implements OnInit {
     window['onYouTubeIframeAPIReady'] = () => this.initPlayer();
   }
 
-  public play(videos: PlaylistItem[]) {
+  public play(videos: PlaylistItem[], startWith?: string) {
     this.randomPlaylist = [];
+    this.currentVideo = 0;
+
+    if (startWith) {
+      this.randomPlaylist.push(startWith);
+    }
+
+    this.isPlaying = true;
     this.videos = videos;
     while (this.randomPlaylist.length < this.videos.length) {
       this.randomize();
     }
     this.nextVideo();
+  }
+
+  public moveVideoToNewIndex(startWith) {
+    this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == startWith), this.currentVideo);
   }
 
   private initPlayer() {
@@ -54,14 +65,9 @@ export class VideoPlayerComponent implements OnInit {
       },
       events: {
         'onStateChange': this.onPlayerStateChanged.bind(this),
-        'onError': this.onPlayerError.bind(this),
-        'onReady': this.onPlayerReady.bind(this)
+        'onError': this.onPlayerError.bind(this)
       }
     })
-  }
-
-  private onPlayerReady(event) {
-    this.playerReady = true;
   }
 
   private onPlayerStateChanged(event) {
@@ -90,13 +96,13 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   private nextVideo() {
-    this.currentVideo += 1;
-    if (this.currentVideo > this.randomPlaylist.length) {
+    if (this.currentVideo == this.randomPlaylist.length) {
       this.play(this.videos);
     } else {
       this.player.loadVideoById(this.randomPlaylist[this.currentVideo], 0);
       this.player.playVideo();
     }
+    this.currentVideo += 1;
   }
 
   private randomize() {
@@ -107,6 +113,25 @@ export class VideoPlayerComponent implements OnInit {
     } else {
       this.randomize();
     }
+  }
+
+  private moveArrayItem(array: any[], oldIndex, newIndex) {
+    if (oldIndex == newIndex - 1) {
+      return;
+    }
+    while (oldIndex < 0) {
+      oldIndex += array.length;
+    }
+    while (newIndex < 0) {
+      newIndex += array.length;
+    }
+    if (newIndex >= array.length) {
+      var k = newIndex - array.length;
+      while ((k--) + 1) {
+        array.push(undefined);
+      }
+    }
+    array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]);
   }
 
 }

@@ -6,6 +6,7 @@ import { PlaylistComponent } from './views/playlist/playlist.component';
 const routes: Routes = [
   { path: '', redirectTo: 'playlist', pathMatch: 'full' },
   { path: 'playlist', component: PlaylistComponent },
+  { path: 'playlist/:list', component: PlaylistComponent },
 ];
 
 @NgModule({

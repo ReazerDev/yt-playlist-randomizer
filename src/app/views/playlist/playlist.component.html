@@ -1,5 +1,12 @@
 <div class="content">
-    <div class="playlist">
+    <div class="getPlaylist" *ngIf="!listId">
+        <mat-form-field appearance="fill">
+            <mat-label>Playlist Link</mat-label>
+            <input #playlistLink matInput placeholder="Playlist Link">
+        </mat-form-field>
+        <button class="openPlaylist"mat-raised-button (click)="openPlaylist(playlistLink.value)" color="primary">Open Playlist</button>
+    </div>
+    <div class="playlist" *ngIf="listId">
         <div class="information-area">
             <div class="information">
                 <img [src]="playlist?.thumbnailUrl" />
@@ -11,7 +18,7 @@
         <div class="playlist-content-area">
             <div class="playlist-content">
                 <div class="videos">
-                    <app-playlist-video *ngFor="let video of playlistItems" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-playlist-video>
+                    <app-playlist-video *ngFor="let video of playlistItems" (click)="playVideo(video.videoId)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-playlist-video>
                 </div>
             </div>
         </div>
