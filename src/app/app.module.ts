@@ -8,18 +8,23 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PlaylistComponent } from './views/playlist/playlist.component';
 import { PlaylistVideoComponent } from './components/playlist-video/playlist-video.component';
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
     PlaylistComponent,
-    PlaylistVideoComponent
+    PlaylistVideoComponent,
+    VideoPlayerComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -31,8 +36,10 @@ import { PlaylistVideoComponent } from './components/playlist-video/playlist-vid
     MatInputModule,
     MatDividerModule,
     HttpClientModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [
+    VideoPlayerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,12 +24,20 @@ img {
     padding: 50px 50px 0 50px;
 }
 
+.information-area {
+    min-width: 480px;
+}
+
 .playlist-content-area {
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
     background-color: rgb(15, 15, 15);
 }
 
 .videos {
     padding: 16px 30px;
+}
+
+button {
+    width: 100%;
 }

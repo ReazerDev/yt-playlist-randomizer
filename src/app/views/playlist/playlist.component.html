@@ -5,6 +5,7 @@
                 <img [src]="playlist?.thumbnailUrl" />
                 <h1>{{ playlist?.title }}</h1>
                 <p>{{ playlist?.description }}</p>
+                <button mat-raised-button color="primary" (click)="play()">Play (Shuffle)</button>
             </div>
         </div>
         <div class="playlist-content-area">
