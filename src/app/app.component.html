@@ -1,9 +1,15 @@
-<!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
   <span>Youtube Playlist Randomizer</span>
-  <span class="example-fill-remaining-space"></span>
+  <span class="filler"></span>
   <app-search-bar></app-search-bar>
-  <span class="example-fill-remaining-space"></span>
-</mat-toolbar> -->
+  <span class="filler"></span>
+  <button mat-icon-button aria-label="Playlist" (click)="navigateToPlaylist()">
+    <mat-icon>playlist_play</mat-icon>
+</button><span class="filler"></span>
+<button mat-icon-button aria-label="Playlist" (click)="navigateToLastPlaylist()">
+  <mat-icon>queue</mat-icon>
+</button>
+</mat-toolbar>
 <app-video-player #videoPlayer></app-video-player>
 
 <router-outlet></router-outlet>

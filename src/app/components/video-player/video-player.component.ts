@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { PlaylistItem } from 'src/app/models/PlaylistItem';
+import { YoutubeVideo } from 'src/app/models/YoutubeVideo';
 
 @Component({
   selector: 'app-video-player',
@@ -7,7 +7,7 @@ import { PlaylistItem } from 'src/app/models/PlaylistItem';
   styleUrls: ['./video-player.component.scss']
 })
 export class VideoPlayerComponent implements OnInit {
-  private videos: PlaylistItem[];
+  private videos: YoutubeVideo[];
   private randomPlaylist: string[] = [];
   private currentVideo: number = 0;
   public isPlaying: boolean = false;
@@ -27,7 +27,7 @@ export class VideoPlayerComponent implements OnInit {
     window['onYouTubeIframeAPIReady'] = () => this.initPlayer();
   }
 
-  public play(videos: PlaylistItem[], startWith?: string) {
+  public play(videos: YoutubeVideo[], startWith?: string) {
     this.randomPlaylist = [];
     this.currentVideo = 0;
 
@@ -45,6 +45,11 @@ export class VideoPlayerComponent implements OnInit {
 
   public moveVideoToNewIndex(startWith) {
     this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == startWith), this.currentVideo);
+  }
+
+  public addToPlaylist(videoId: string) {
+    this.randomPlaylist.push(videoId);
+    this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == videoId), this.currentVideo);
   }
 
   private initPlayer() {

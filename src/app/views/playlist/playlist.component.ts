@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { YoutubePlaylistService } from 'src/app/services/youtube-playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
-import { PlaylistItem } from 'src/app/models/PlaylistItem';
+import { YoutubeVideo } from 'src/app/models/YoutubeVideo';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PlaylistComponent implements OnInit {
   public playlist: Playlist;
-  public playlistItems: PlaylistItem[];
+  public playlistItems: YoutubeVideo[];
   public listId: string;
 
   constructor(
@@ -31,10 +31,12 @@ export class PlaylistComponent implements OnInit {
   }
 
   public getPlaylist() {
-    this.youtube$.getPlaylist('https://www.youtube.com/playlist?list=' + this.listId).subscribe(res => {
+    this.playlist = null;
+    this.playlistItems = null;
+    this.youtube$.getPlaylist(this.listId).subscribe(res => {
       this.playlist = res;
     });
-    this.youtube$.getPlaylistItems('https://www.youtube.com/playlist?list=' + this.listId);
+    this.youtube$.getPlaylistItems(this.listId);
     this.youtube$.watch().subscribe(res => {
       this.playlistItems = res;
     });
@@ -53,7 +55,10 @@ export class PlaylistComponent implements OnInit {
   }
 
   public openPlaylist(playlistLink: string) {
-    this.router.navigate(['playlist/' + playlistLink.replace('https://www.youtube.com/playlist?list=', '')]);
+    this.listId = playlistLink.replace('https://www.youtube.com/playlist?list=', '');
+    this.router.navigate(['playlist/' + this.listId]);
+    this.getPlaylist();
+    this.appComponent.lastPlaylistId = this.listId;
   }
 
 }

@@ -13,18 +13,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PlaylistComponent } from './views/playlist/playlist.component';
-import { PlaylistVideoComponent } from './components/playlist-video/playlist-video.component';
+import { YoutubeVideoComponent } from './components/youtube-video/youtube-video.component';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { SearchComponent } from './views/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBarComponent,
     PlaylistComponent,
-    PlaylistVideoComponent,
+    YoutubeVideoComponent,
     VideoPlayerComponent,
-    SafePipe
+    SafePipe,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

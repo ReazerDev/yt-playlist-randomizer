@@ -1,6 +1,6 @@
 <div>
-    <input placeholder="Search">
-    <button mat-icon-button aria-label="Search">
+    <input #searchKeyword placeholder="Search">
+    <button mat-icon-button aria-label="Search" (click)="search(searchKeyword.value)">
         <mat-icon>search</mat-icon>
     </button>
 </div>

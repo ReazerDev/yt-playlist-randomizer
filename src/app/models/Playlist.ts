@@ -1,5 +1,3 @@
-import { PlaylistItem } from './PlaylistItem';
-
 export class Playlist {
     public title: string;
     public description: string;

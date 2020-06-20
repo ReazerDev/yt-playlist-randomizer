@@ -18,7 +18,7 @@
         <div class="playlist-content-area">
             <div class="playlist-content">
                 <div class="videos">
-                    <app-playlist-video *ngFor="let video of playlistItems" (click)="playVideo(video.videoId)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-playlist-video>
+                    <app-youtube-video *ngFor="let video of playlistItems" (click)="playVideo(video.videoId)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
                 </div>
             </div>
         </div>
