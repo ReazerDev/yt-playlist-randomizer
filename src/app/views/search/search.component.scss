@@ -1,0 +1,14 @@
+.videos {
+    position: relative;
+    padding: 16px 0 16px 0;
+    overflow-y: scroll;
+    left: 480px;
+}
+
+.content, .search, .videos {
+    height: 94.5%;
+}
+
+app-youtube-video {
+    cursor: pointer;
+}
