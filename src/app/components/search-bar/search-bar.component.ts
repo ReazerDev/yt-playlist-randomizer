@@ -15,7 +15,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   public search(keyword: string) {
-    this.router.navigate(['search/' + keyword]);
+    if (keyword != "") {
+      this.router.navigate(['search/' + keyword]);
+    }
   }
 
   public searchEnter(keyword: string, button) {
