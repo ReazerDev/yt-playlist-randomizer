@@ -5,22 +5,24 @@ import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { YoutubeVideo } from '../models/YoutubeVideo';
 import { Playlist } from '../models/Playlist';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YoutubePlaylistService {
   private subject = new BehaviorSubject<YoutubeVideo[]>(null);
-  private apiKey: string = environment.apiKey;
   private nextPageToken: string;
   private itemCount: number = 0;
   private items: YoutubeVideo[] = [];
-  private videoUrl: string = 'https://www.googleapis.com/youtube/v3/videos?key=' + this.apiKey + '&part=snippet,contentDetails&id=';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
 
   public getPlaylist(playlistId: string) {
-    return this.http.get('https://www.googleapis.com/youtube/v3/playlists?key=' + this.apiKey + '&part=snippet&fields=items/snippet(title,description,thumbnails)&id=' + playlistId).pipe(map(res => {
+    return this.http.get('https://www.googleapis.com/youtube/v3/playlists?key=' + this.cookieService.get('apiKey') + '&part=snippet&fields=items/snippet(title,description,thumbnails)&id=' + playlistId).pipe(map(res => {
       return Playlist.new(res['items'][0]);
     }));
   }
@@ -49,7 +51,7 @@ export class YoutubePlaylistService {
   }
 
   private createUrl(playlistId: string) {
-    let apiUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?key=' + this.apiKey + '&playlistId=' + playlistId + '&part=snippet&fields=nextPageToken,pageInfo,items/snippet(title,resourceId/videoId,thumbnails)&maxResults=50';
+    let apiUrl = 'https://www.googleapis.com/youtube/v3/playlistItems?key=' + this.cookieService.get('apiKey') + '&playlistId=' + playlistId + '&part=snippet&fields=nextPageToken,pageInfo,items/snippet(title,resourceId/videoId,thumbnails)&maxResults=50';
     if (this.nextPageToken) {
       apiUrl = apiUrl + '&pageToken=' + this.nextPageToken;
     }

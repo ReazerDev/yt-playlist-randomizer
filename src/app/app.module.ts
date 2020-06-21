@@ -10,7 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
-import { CookieService } from 'ngx-cookie-service';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -19,6 +19,8 @@ import { YoutubeVideoComponent } from './components/youtube-video/youtube-video.
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { SearchComponent } from './views/search/search.component';
+import { SettingsComponent } from './views/settings/settings.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { SearchComponent } from './views/search/search.component';
     YoutubeVideoComponent,
     VideoPlayerComponent,
     SafePipe,
-    SearchComponent
+    SearchComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { SearchComponent } from './views/search/search.component';
     MatDividerModule,
     HttpClientModule,
     MatButtonModule,
-    MatRippleModule
+    MatRippleModule,
+    MatRadioModule
   ],
   providers: [
     VideoPlayerComponent,
