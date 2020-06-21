@@ -51,11 +51,6 @@ export class VideoPlayerComponent implements OnInit {
     this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == startWith), this.currentVideo);
   }
 
-  public addToPlaylist(video: YoutubeVideo) {
-    this.randomPlaylist.push(video);
-    this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == video), this.currentVideo);
-  }
-
   public changeListState() {
     this.showList = !this.showList;
     console.log(this.showList);

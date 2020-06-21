@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit {
     if (!this.appComponent.videoPlayer.isPlaying) {
       this.appComponent.videoPlayer.play([], video);
     } else {
-      this.appComponent.videoPlayer.addToPlaylist(video);
+      this.appComponent.videoPlayer.moveVideoToNewIndex(video);
     }
   }
 
