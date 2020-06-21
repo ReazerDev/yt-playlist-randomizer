@@ -18,4 +18,9 @@ export class SearchBarComponent implements OnInit {
     this.router.navigate(['search/' + keyword]);
   }
 
+  public searchEnter(keyword: string, button) {
+    button.ripple.launch();
+    this.search(keyword);
+  }
+
 }

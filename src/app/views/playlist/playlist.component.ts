@@ -4,6 +4,7 @@ import { Playlist } from 'src/app/models/Playlist';
 import { YoutubeVideo } from 'src/app/models/YoutubeVideo';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-playlist',
@@ -19,7 +20,8 @@ export class PlaylistComponent implements OnInit {
     private youtube$: YoutubePlaylistService,
     private appComponent: AppComponent,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
@@ -46,19 +48,18 @@ export class PlaylistComponent implements OnInit {
     this.appComponent.play(this.playlistItems);
   }
 
-  public playVideo(videoId: string) {
+  public playVideo(video: YoutubeVideo) {
     if (!this.appComponent.videoPlayer.isPlaying) {
-      this.appComponent.videoPlayer.play(this.playlistItems, videoId);
+      this.appComponent.videoPlayer.play(this.playlistItems, video);
     } else {
-      this.appComponent.videoPlayer.moveVideoToNewIndex(videoId);
+      this.appComponent.videoPlayer.moveVideoToNewIndex(video);
     }
   }
 
   public openPlaylist(playlistLink: string) {
     this.listId = playlistLink.replace('https://www.youtube.com/playlist?list=', '');
+    this.cookieService.set('lastPlaylistId', this.listId);
     this.router.navigate(['playlist/' + this.listId]);
-    this.getPlaylist();
-    this.appComponent.lastPlaylistId = this.listId;
   }
 
 }

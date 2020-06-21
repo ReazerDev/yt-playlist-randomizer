@@ -1,3 +1,11 @@
 <div class="video-player">
+    <div class="randomList">
+        <div matRipple class="showHide" (click)="changeListState()">
+            <mat-icon>{{ showList ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+        </div>
+        <div [class]="showList ? 'show' : 'hide'" class="list">
+            <app-youtube-video *ngFor="let video of randomPlaylist" (click)="moveVideoToNewIndex(video)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
+        </div>
+    </div>
     <div id="player"></div>
 </div>

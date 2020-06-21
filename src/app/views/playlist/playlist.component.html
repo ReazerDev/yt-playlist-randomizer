@@ -4,7 +4,8 @@
             <mat-label>Playlist Link</mat-label>
             <input #playlistLink matInput placeholder="Playlist Link">
         </mat-form-field>
-        <button class="openPlaylist"mat-raised-button (click)="openPlaylist(playlistLink.value)" color="primary">Open Playlist</button>
+        <button class="openPlaylist" mat-raised-button (click)="openPlaylist(playlistLink.value)" color="primary">Open Playlist</button>
+        <button class="openPartyPlaylist" mat-raised-button (click)="openPlaylist('https://www.youtube.com/playlist?list=PLHoA1d-3PLY-v0rN0P84CsWuVacq9_zuB')" color="primary">Open Party Playlist</button>
     </div>
     <div class="playlist" *ngIf="listId">
         <div class="information-area">
@@ -18,7 +19,7 @@
         <div class="playlist-content-area">
             <div class="playlist-content">
                 <div class="videos">
-                    <app-youtube-video *ngFor="let video of playlistItems" (click)="playVideo(video.videoId)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
+                    <app-youtube-video *ngFor="let video of playlistItems" (click)="playVideo(video)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
                 </div>
             </div>
         </div>

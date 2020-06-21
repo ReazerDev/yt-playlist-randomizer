@@ -9,3 +9,45 @@ iframe {
     width: 480px;
     height: 270px;
 }
+
+.showHide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #030303;
+    color: #fff;
+    min-height: 30px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.showHide:hover {
+    cursor: pointer;
+}
+
+.list {
+    transition: all 500ms;
+    background-color: rgb(24, 24, 24);
+    overflow-y: scroll;
+    max-width: 480px;
+}
+
+.show {
+    height: 500px;
+}
+
+.hide {
+    height: 0px;
+}
+
+app-youtube-video {
+    transition: all 500ms;
+}
+
+app-youtube-video:hover {
+    cursor: pointer;
+}

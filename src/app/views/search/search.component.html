@@ -1,7 +1,7 @@
 <div class="content">
     <div class="search">
         <div class="videos">
-            <app-youtube-video *ngFor="let video of searchResults" (click)="playVideo(video.videoId)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
+            <app-youtube-video *ngFor="let video of searchResults" (click)="playVideo(video)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
         </div>
     </div>
 </div>

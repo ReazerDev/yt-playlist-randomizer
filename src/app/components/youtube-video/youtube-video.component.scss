@@ -1,3 +1,14 @@
+.ripple {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    padding: 8px;
+    border-radius: 4px;
+}
+
 .video {
     display: flex;
     flex-direction: row;
@@ -23,7 +34,7 @@ img {
     background-color: #000000cc;
     padding: 2px 4px;
     border-radius: 2px;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     font-size: 12px;
     font-weight: 500;
     line-height: 12px;

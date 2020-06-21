@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -17,6 +19,7 @@ import { YoutubeVideoComponent } from './components/youtube-video/youtube-video.
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { SearchComponent } from './views/search/search.component';
+
 
 @NgModule({
   declarations: [
@@ -39,9 +42,11 @@ import { SearchComponent } from './views/search/search.component';
     MatDividerModule,
     HttpClientModule,
     MatButtonModule,
+    MatRippleModule
   ],
   providers: [
-    VideoPlayerComponent],
+    VideoPlayerComponent,
+    CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

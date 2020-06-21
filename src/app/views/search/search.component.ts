@@ -41,11 +41,11 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  public playVideo(videoId: string) {
+  public playVideo(video: YoutubeVideo) {
     if (!this.appComponent.videoPlayer.isPlaying) {
-      this.appComponent.videoPlayer.play([], videoId);
+      this.appComponent.videoPlayer.play([], video);
     } else {
-      this.appComponent.videoPlayer.addToPlaylist(videoId);
+      this.appComponent.videoPlayer.addToPlaylist(video);
     }
   }
 

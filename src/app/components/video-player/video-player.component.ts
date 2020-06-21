@@ -8,9 +8,10 @@ import { YoutubeVideo } from 'src/app/models/YoutubeVideo';
 })
 export class VideoPlayerComponent implements OnInit {
   private videos: YoutubeVideo[];
-  private randomPlaylist: string[] = [];
+  public randomPlaylist: YoutubeVideo[] = [];
   private currentVideo: number = 0;
   public isPlaying: boolean = false;
+  public showList: boolean = false;
 
   private YT: any;
   private player: any;
@@ -27,7 +28,7 @@ export class VideoPlayerComponent implements OnInit {
     window['onYouTubeIframeAPIReady'] = () => this.initPlayer();
   }
 
-  public play(videos: YoutubeVideo[], startWith?: string) {
+  public play(videos: YoutubeVideo[], startWith?: YoutubeVideo) {
     this.randomPlaylist = [];
     this.currentVideo = 0;
 
@@ -44,12 +45,20 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   public moveVideoToNewIndex(startWith) {
+    if (!this.randomPlaylist.includes(startWith)) {
+      this.randomPlaylist.push(startWith);
+    }
     this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == startWith), this.currentVideo);
   }
 
-  public addToPlaylist(videoId: string) {
-    this.randomPlaylist.push(videoId);
-    this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == videoId), this.currentVideo);
+  public addToPlaylist(video: YoutubeVideo) {
+    this.randomPlaylist.push(video);
+    this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == video), this.currentVideo);
+  }
+
+  public changeListState() {
+    this.showList = !this.showList;
+    console.log(this.showList);
   }
 
   private initPlayer() {
@@ -66,7 +75,7 @@ export class VideoPlayerComponent implements OnInit {
         showInfo: 0,
         fs: 0,
         playsinline: 1,
-        origin: 'http://localhost:4200/playlist'
+        origin: 'http://ytparty.reazer.net'
       },
       events: {
         'onStateChange': this.onPlayerStateChanged.bind(this),
@@ -104,7 +113,7 @@ export class VideoPlayerComponent implements OnInit {
     if (this.currentVideo == this.randomPlaylist.length) {
       this.play(this.videos);
     } else {
-      this.player.loadVideoById(this.randomPlaylist[this.currentVideo], 0);
+      this.player.loadVideoById(this.randomPlaylist[this.currentVideo].videoId, 0);
       this.player.playVideo();
     }
     this.currentVideo += 1;
@@ -113,8 +122,8 @@ export class VideoPlayerComponent implements OnInit {
   private randomize() {
     let number = Math.floor(Math.random() * Math.floor(this.videos.length));
 
-    if (!this.randomPlaylist.includes(this.videos[number].videoId)) {
-      this.randomPlaylist.push(this.videos[number].videoId);
+    if (!this.randomPlaylist.includes(this.videos[number])) {
+      this.randomPlaylist.push(this.videos[number]);
     } else {
       this.randomize();
     }

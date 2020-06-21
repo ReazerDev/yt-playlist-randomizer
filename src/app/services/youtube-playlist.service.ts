@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -11,7 +11,7 @@ import { Playlist } from '../models/Playlist';
 })
 export class YoutubePlaylistService {
   private subject = new BehaviorSubject<YoutubeVideo[]>(null);
-  private apiKey: string = environment.api_key;
+  private apiKey: string = environment.apiKey;
   private nextPageToken: string;
   private itemCount: number = 0;
   private items: YoutubeVideo[] = [];

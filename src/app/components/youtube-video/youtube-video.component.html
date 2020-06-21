@@ -1,13 +1,16 @@
-<div class="video">
-    <div class="thumbnail">
-        <img [src]="thumbnailUrl" />
-        <div class="videoLength">
-            <p>{{ videoLength }}</p>
+<div matRipple class="ripple">
+    <div class="video">
+        <div class="thumbnail">
+            <img [src]="thumbnailUrl" />
+            <div class="videoLength">
+                <p>{{ videoLength }}</p>
+            </div>
+        </div>
+        <div class="text">
+            <h3>{{ title }}</h3>
+            <p class="channelName">{{ channelName }}</p>
         </div>
     </div>
-    <div class="text">
-        <h3>{{ title }}</h3>
-        <p class="channelName">{{ channelName }}</p>
-    </div>
 </div>
+
 <mat-divider></mat-divider>
