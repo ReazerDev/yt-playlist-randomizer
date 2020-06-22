@@ -1,4 +1,4 @@
-<div class="video-player">
+<div [hidden]="!isPlaying" class="video-player">
     <div class="randomList">
         <div matRipple class="showHide" (click)="changeListState()">
             <mat-icon>{{ showList ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
