@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { YoutubeVideo } from '../models/YoutubeVideo';
@@ -22,7 +22,10 @@ export class YoutubePlaylistService {
   ) { }
 
   public getPlaylist(playlistId: string) {
-    return this.http.get('https://www.googleapis.com/youtube/v3/playlists?key=' + this.cookieService.get('apiKey') + '&part=snippet&fields=items/snippet(title,description,thumbnails)&id=' + playlistId).pipe(map(res => {
+    this.items = [];
+    this.itemCount = 0;
+    return this.http.get('https://www.googleapis.com/youtube/v3/playlists?key=' + this.cookieService.get('apiKey') + '&part=snippet,contentDetails&fields=items/contentDetails(itemCount),items/snippet(title,description,thumbnails)&id=' + playlistId).pipe(map(res => {
+      console.log(res['items']);
       return Playlist.new(res['items'][0]);
     }));
   }
@@ -33,13 +36,19 @@ export class YoutubePlaylistService {
       this.nextPageToken = res['nextPageToken'];
       this.itemCount = res['pageInfo']['totalResults'];
       if (this.items.length < this.itemCount) {
+        this.subject.next(this.items);
         this.getPlaylistItems(playlistId);
       }
       if (this.items.length == this.itemCount) {
-        /*this.getVideoRequest().subscribe(res => {
-          console.log(res);
-        })*/
         this.subject.next(this.items);
+      }
+    }, error => {
+      switch (error.status) {
+        case 403:
+          let currIndex = Number.parseInt(this.cookieService.get('apiKeyIndex'));
+          this.cookieService.set('apiKey', environment.apiKeys[currIndex + 1]);
+          this.cookieService.set('apiKeyIndex', String(currIndex + 1));
+        break;
       }
     });
   }

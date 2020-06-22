@@ -5,6 +5,7 @@ import { YoutubeVideo } from 'src/app/models/YoutubeVideo';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-playlist',
@@ -21,7 +22,8 @@ export class PlaylistComponent implements OnInit {
     private appComponent: AppComponent,
     private route: ActivatedRoute,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -45,10 +47,22 @@ export class PlaylistComponent implements OnInit {
   }
 
   public play() {
+    if (this.playlist.itemCount != this.playlistItems.length) {
+      this.snackBar.open("Please wait until the playlist has been loaded", "Ok", {
+        duration: 2000,
+      });
+      return;
+    }
     this.appComponent.play(this.playlistItems);
   }
 
   public playVideo(video: YoutubeVideo) {
+    if (this.playlist.itemCount != this.playlistItems.length) {
+      this.snackBar.open("Please wait until the playlist has been loaded", "Ok", {
+        duration: 2000,
+      });
+      return;
+    }
     if (!this.appComponent.videoPlayer.isPlaying) {
       this.appComponent.videoPlayer.play(this.playlistItems, video);
     } else {

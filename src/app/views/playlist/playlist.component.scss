@@ -22,10 +22,13 @@ img {
 
 .information {
     padding: 50px 50px 0 50px;
+    overflow-y: scroll;
+    height: 50vh;
 }
 
 .information-area {
     min-width: 480px;
+    max-width: 480px;
 }
 
 .playlist-content-area {
