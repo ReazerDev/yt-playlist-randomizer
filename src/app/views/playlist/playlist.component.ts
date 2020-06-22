@@ -53,6 +53,13 @@ export class PlaylistComponent implements OnInit {
       });
       return;
     }
+
+    if (!this.appComponent.videoPlayer.isReady) {
+      this.snackBar.open("Please wait until the video player has been loaded", "Ok", {
+        duration: 2000,
+      });
+      return;
+    }
     this.appComponent.play(this.playlistItems);
   }
 
@@ -63,6 +70,14 @@ export class PlaylistComponent implements OnInit {
       });
       return;
     }
+
+    if (!this.appComponent.videoPlayer.isReady) {
+      this.snackBar.open("Please wait until the video player has been loaded", "Ok", {
+        duration: 2000,
+      });
+      return;
+    }
+    
     if (!this.appComponent.videoPlayer.isPlaying) {
       this.appComponent.videoPlayer.play(this.playlistItems, video);
     } else {

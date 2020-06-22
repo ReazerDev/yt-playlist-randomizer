@@ -10,6 +10,7 @@ export class VideoPlayerComponent implements OnInit {
   private videos: YoutubeVideo[];
   public randomPlaylist: YoutubeVideo[] = [];
   private currentVideo: number = 0;
+  public isReady: boolean = false;
   public isPlaying: boolean = false;
   public showList: boolean = false;
 
@@ -74,7 +75,8 @@ export class VideoPlayerComponent implements OnInit {
       },
       events: {
         'onStateChange': this.onPlayerStateChanged.bind(this),
-        'onError': this.onPlayerError.bind(this)
+        'onError': this.onPlayerError.bind(this),
+        'onReady': this.onPlayerReady.bind(this)
       }
     })
   }
@@ -101,7 +103,10 @@ export class VideoPlayerComponent implements OnInit {
       case 101 || 150:
         break;
     }
+  }
 
+  private onPlayerReady(event) {
+    this.isReady = true;
   }
 
   private nextVideo() {
