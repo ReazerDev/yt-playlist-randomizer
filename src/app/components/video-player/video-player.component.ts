@@ -57,6 +57,10 @@ export class VideoPlayerComponent implements OnInit {
     console.log(this.showList);
   }
 
+  public clearList() {
+    this.randomPlaylist = [];
+  }
+
   private initPlayer() {
     this.reframed = false;
     this.player = new window['YT'].Player('player', {

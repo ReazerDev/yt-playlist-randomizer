@@ -6,6 +6,7 @@
         <div [class]="showList ? 'show' : 'hide'" class="list">
             <app-youtube-video *ngFor="let video of randomPlaylist" (click)="moveVideoToNewIndex(video)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
         </div>
+        <button mat-raised-button class="clear" (click)="clearList()">Clear list</button>
     </div>
     <div id="player"></div>
 </div>
