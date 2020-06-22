@@ -54,11 +54,14 @@ export class VideoPlayerComponent implements OnInit {
 
   public changeListState() {
     this.showList = !this.showList;
-    console.log(this.showList);
   }
 
   public clearList() {
     this.randomPlaylist = [];
+  }
+
+  public removeVideo(video: YoutubeVideo) {
+    this.randomPlaylist = this.randomPlaylist.filter(x => x != video);
   }
 
   private initPlayer() {

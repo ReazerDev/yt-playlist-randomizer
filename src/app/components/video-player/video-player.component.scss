@@ -46,6 +46,7 @@ iframe {
 
 app-youtube-video {
     transition: all 500ms;
+    width: 100%;
 }
 
 app-youtube-video:hover {
@@ -54,4 +55,14 @@ app-youtube-video:hover {
 
 .clear {
     width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+button {
+    color: #fff;
 }
