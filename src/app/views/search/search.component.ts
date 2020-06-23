@@ -45,8 +45,8 @@ export class SearchComponent implements OnInit {
       switch (error.status) {
         case 403:
           let currIndex = Number.parseInt(this.cookieService.get('apiKeyIndex'));
-          this.cookieService.set('apiKey', environment.apiKeys[currIndex + 1]);
-          this.cookieService.set('apiKeyIndex', String(currIndex + 1));
+          this.cookieService.set('apiKey', environment.apiKeys[currIndex + 1], 365);
+          this.cookieService.set('apiKeyIndex', String(currIndex + 1), 365);
           break;
       }
     });
@@ -54,7 +54,7 @@ export class SearchComponent implements OnInit {
 
   public playVideo(video: YoutubeVideo) {
     if (!this.appComponent.videoPlayer.isPlaying) {
-      this.appComponent.videoPlayer.play([], video);
+      this.appComponent.videoPlayer.play([video]);
     } else {
       this.appComponent.videoPlayer.moveVideoToNewIndex(video);
     }

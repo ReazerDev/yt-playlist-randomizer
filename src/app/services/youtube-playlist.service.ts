@@ -45,8 +45,8 @@ export class YoutubePlaylistService {
       switch (error.status) {
         case 403:
           let currIndex = Number.parseInt(this.cookieService.get('apiKeyIndex'));
-          this.cookieService.set('apiKey', environment.apiKeys[currIndex + 1]);
-          this.cookieService.set('apiKeyIndex', String(currIndex + 1));
+          this.cookieService.set('apiKey', environment.apiKeys[currIndex + 1], 365);
+          this.cookieService.set('apiKeyIndex', String(currIndex + 1), 365);
         break;
       }
     });

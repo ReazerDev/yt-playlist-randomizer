@@ -19,8 +19,13 @@ export class VideoPlayerComponent implements OnInit {
   private player: any;
   private reframed: boolean = false;
 
+  private iframe: any;
+  private clickCount: number = 0;
+  private isFullscreen: boolean = false;
+
   constructor(
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +51,7 @@ export class VideoPlayerComponent implements OnInit {
       this.randomize();
     }
     this.nextVideo();
+    this.clickCount = 0;
   }
 
   public moveVideoToNewIndex(startWith) {
@@ -67,6 +73,10 @@ export class VideoPlayerComponent implements OnInit {
 
   public removeVideo(video: YoutubeVideo) {
     this.randomPlaylist = this.randomPlaylist.filter(x => x != video);
+  }
+
+  public isVideoPlaying(video: YoutubeVideo) {
+    return this.randomPlaylist[this.currentVideo - 1] == video;
   }
 
   private initPlayer() {
@@ -96,8 +106,10 @@ export class VideoPlayerComponent implements OnInit {
   private onPlayerStateChanged(event) {
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
+        this.clicked();
         break;
       case window['YT'].PlayerState.PAUSED:
+        this.clicked();
         break;
       case window['YT'].PlayerState.ENDED:
         this.nextVideo();
@@ -119,12 +131,58 @@ export class VideoPlayerComponent implements OnInit {
 
   private onPlayerReady(event) {
     this.isReady = true;
+    this.iframe = document.getElementById('player');
+  }
+
+  private clicked() {
+    this.clickCount++;
+    setTimeout(() => {
+      if (this.clickCount == 2) {
+        if(!this.isFullscreen) {
+          this.playFullscreen();
+        } else {
+          this.exitFullscreen();
+          this.isFullscreen = false;
+        }
+      }
+      else {
+        this.clickCount = 0;
+      }
+    }, 250);
+  }
+
+  private playFullscreen() {
+    this.clickCount = 0;
+    var requestFullScreen = this.iframe.requestFullScreen || this.iframe.mozRequestFullScreen || this.iframe.webkitRequestFullScreen;
+    if (requestFullScreen) {
+      requestFullScreen.bind(this.iframe)();
+      this.isFullscreen = true;
+    }
+  }
+
+  private exitFullscreen() {
+    this.clickCount = 0;
+    if (document['exitFullscreen']) {
+      document['exitFullscreen']();
+    } else if (document['mozCancelFullScreen']) { /* Firefox */
+      document['mozCancelFullScreen']();
+    } else if (document['webkitExitFullscreen']) { /* Chrome, Safari and Opera */
+      document['webkitExitFullscreen']();
+    } else if (document['msExitFullscreen']) { /* IE/Edge */
+      document['msExitFullscreen']();
+    }
   }
 
   private nextVideo() {
     if (this.currentVideo == this.randomPlaylist.length) {
       this.play(this.videos);
+      return;
     } else {
+      if (this.randomPlaylist[this.currentVideo - 1]) {
+        this.randomPlaylist[this.currentVideo - 1].isPlaying = false;
+      }
+      this.randomPlaylist[this.currentVideo].isPlaying = true;
+      this.cdr.detectChanges();
       this.player.loadVideoById(this.randomPlaylist[this.currentVideo].videoId, 0);
       this.player.playVideo();
     }

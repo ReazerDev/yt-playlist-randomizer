@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cookieService.set('apiKey', environment.apiKeys[0]);
-    this.cookieService.set('apiKeyIndex', '0');
+    this.cookieService.set('apiKey', environment.apiKeys[0], 365);
+    this.cookieService.set('apiKeyIndex', '0', 365);
   }
 
   public play(playlistItems) {

@@ -87,7 +87,7 @@ export class PlaylistComponent implements OnInit {
 
   public openPlaylist(playlistLink: string) {
     this.listId = playlistLink.replace('https://www.youtube.com/playlist?list=', '');
-    this.cookieService.set('lastPlaylistId', this.listId);
+    this.cookieService.set('lastPlaylistId', this.listId, 365);
     this.router.navigate(['playlist/' + this.listId]);
   }
 

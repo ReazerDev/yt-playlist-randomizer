@@ -20,7 +20,7 @@ export class ModeComponent implements OnInit {
 
     console.log(this.mode);
     if (this.mode == 'me' || 'parents') {
-      this.cookieService.set('mode', this.mode);
+      this.cookieService.set('mode', this.mode, 365);
       this.router.navigate(['playlist']);
     }
   }

@@ -4,7 +4,7 @@
             <mat-icon>{{ showList ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
         </div>
         <div [class]="showList ? 'show' : 'hide'" class="list">
-            <div class="listItem" *ngFor="let video of randomPlaylist">
+            <div class="listItem" [class]="video.isPlaying ? 'highlight' : ''" *ngFor="let video of randomPlaylist">
                 <div class="row">
                     <app-youtube-video (click)="moveVideoToNewIndex(video)" [title]="video?.title" [channelName]="video?.channelTitle" [thumbnailUrl]="video?.thumbnailUrl" [videoLength]="video.videoLength"></app-youtube-video>
                     <button mat-icon-button aria-label="delete" (click)="removeVideo(video)">

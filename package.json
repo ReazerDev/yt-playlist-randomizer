@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod && scp -r -P 50 dist/yt-playlist-randomizer/* sandro@reazer.net:/var/www/ytparty"
   },
   "private": true,
   "dependencies": {

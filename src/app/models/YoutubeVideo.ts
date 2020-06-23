@@ -4,6 +4,7 @@ export class YoutubeVideo {
     public channelTitle: string;
     public videoLength: string;
     public thumbnailUrl: string;
+    public isPlaying: boolean;
 
     public static new(json, isSearch: boolean = false) {
         let model = new YoutubeVideo();
@@ -12,6 +13,7 @@ export class YoutubeVideo {
         model.channelTitle = json['snippet']['channelTitle'] || 'Unavailable';
         model.videoLength = "0:00";
         model.thumbnailUrl = json['snippet']['thumbnails']['default']['url'];
+        model.isPlaying = false;
         
         return model;
     }
