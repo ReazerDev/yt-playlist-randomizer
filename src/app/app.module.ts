@@ -21,6 +21,7 @@ import { VideoPlayerComponent } from './components/video-player/video-player.com
 import { SafePipe } from './pipes/safe.pipe';
 import { SearchComponent } from './views/search/search.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ModeComponent } from './views/mode/mode.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { CookieService } from 'ngx-cookie-service';
     VideoPlayerComponent,
     SafePipe,
     SearchComponent,
+    ModeComponent,
   ],
   imports: [
     BrowserModule,

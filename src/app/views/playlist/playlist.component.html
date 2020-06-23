@@ -14,7 +14,7 @@
                 <h1>{{ playlist?.title }}</h1>
                 <p>{{ playlist?.description }}</p>
                 <p>Video Count: {{ playlist?.itemCount }}</p>
-                <button [disabled]="playlist.itemCount != playlistItems.length" mat-raised-button color="primary" (click)="play()">Play (Shuffle)</button>
+                <button [disabled]="playlist?.itemCount != playlistItems?.length" mat-raised-button color="primary" (click)="play()">Play (Shuffle)</button>
             </div>
         </div>
         <div class="playlist-content-area">

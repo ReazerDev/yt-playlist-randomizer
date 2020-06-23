@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { YoutubeVideo } from 'src/app/models/YoutubeVideo';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-video-player',
@@ -18,7 +19,9 @@ export class VideoPlayerComponent implements OnInit {
   private player: any;
   private reframed: boolean = false;
 
-  constructor() { }
+  constructor(
+    private cookieService: CookieService
+  ) { }
 
   ngOnInit(): void {
     let tag = document.createElement('script');
@@ -49,7 +52,9 @@ export class VideoPlayerComponent implements OnInit {
     if (!this.randomPlaylist.includes(startWith)) {
       this.randomPlaylist.push(startWith);
     }
-    this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == startWith), this.currentVideo);
+    if (this.cookieService.get('mode') == 'me') {
+      this.moveArrayItem(this.randomPlaylist, this.randomPlaylist.findIndex(x => x == startWith), this.currentVideo);
+    }
   }
 
   public changeListState() {

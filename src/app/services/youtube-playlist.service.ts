@@ -25,7 +25,6 @@ export class YoutubePlaylistService {
     this.items = [];
     this.itemCount = 0;
     return this.http.get('https://www.googleapis.com/youtube/v3/playlists?key=' + this.cookieService.get('apiKey') + '&part=snippet,contentDetails&fields=items/contentDetails(itemCount),items/snippet(title,description,thumbnails)&id=' + playlistId).pipe(map(res => {
-      console.log(res['items']);
       return Playlist.new(res['items'][0]);
     }));
   }
